@@ -791,6 +791,9 @@ final public class EVReflection {
         }
         for property in reflected.children {
             if let key:String = property.label {
+                if (key.hasPrefix("ignore_")) {
+                    continue
+                }
                 var value = property.value
                 if let (_, _, propertyGetter) = (theObject as? EVObject)?.propertyConverters().filter({$0.0 == key}).first {
                     value = propertyGetter()
